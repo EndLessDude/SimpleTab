@@ -28,3 +28,11 @@ fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
     .catch(err => {
         app.innerHTML = `<p>Error: ${err.message}</p>`;
     }); 
+
+const search = document.querySelector("#search"); // Makes search bar functional
+search.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        const query = search.value;
+        window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+    }
+});
