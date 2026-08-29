@@ -4,32 +4,32 @@ const API_KEY = import.meta.env.VITE_NASA_API_KEY;
 
 const app = document.querySelector("#app");
 
-const explanation = `Eclipses tend to come in pairs. Twice a year, during an eclipse season that lasts about 34 days, Sun, Moon, and Earth can nearly align. Then the new and full phases of the Moon, separated by just over 14 days, create a solar and a lunar eclipse. But only rarely is the alignment at both new moon and full moon during a single eclipse season close enough to produce a pair with both total solar and lunar eclipses. More often, partial eclipses are part of any eclipse season. But, the last eclipse season of 2026 did produce this fortnight-separated pairing of a total solar eclipse on August 12 (top) and an almost total lunar eclipse on the night of August 27/28. At New Moon, the solar eclipse was captured at Peñafiel, Spain near the begining of totality in this HDR composite image, revealing a flash of Bailey's beads and a golden solar corona. At the following Full Moon, the deep partial lunar eclipse was recorded from Sèvres, France. Also an HDR composite, the image shows this partial eclipse at closer to half its 93 percent maximum phase, so about half the visible lunar disk appears darkened and reddened within Earth's umbral shadow. The coming eclipse season will see an annular solar eclipse on 2027 February 6 paired with a penumbral lunar eclipse on February 20/21.`;
-
 fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`)
     .then(response => response.json())
     .then(data => {
         let media;
 
         if (data.media_type === "image") {
-    media = `<img src="${data.url}">`;
-} else if (data.url.includes("youtube")) {
-    console.log(data.url);
-    media = `<iframe src="${data.url}"></iframe>`;
-} else {
-    media = `<video src="${data.url}" controls></video>`;
-}
+            media = `<img src="${data.url}">`;
+        } else if (data.url.includes("youtube")) {
+            media = `<iframe src="${data.url}"></iframe>`;
+        } else {
+            media = `<video src="${data.url}" controls></video>`;
+        }
 
         app.innerHTML = `
+            <h1>${data.title}</h1>
             ${media}
-            <p>${explanation}</p>
+            <p>${data.explanation}</p>
         `;
     })
     .catch(err => {
         app.innerHTML = `<p>Error: ${err.message}</p>`;
-    }); 
+    });
 
-const search = document.querySelector("#search"); // Makes search bar functional
+// Search bar
+const search = document.querySelector("#search");
+
 search.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
         const query = search.value;
@@ -37,7 +37,7 @@ search.addEventListener("keydown", (event) => {
     }
 });
 
-//Clock and
+// Clock and date
 const clock = document.querySelector("#clock");
 
 function updateClock() {
@@ -58,8 +58,3 @@ function updateClock() {
 
 updateClock();
 setInterval(updateClock, 1000);
-
-
-
-
-
