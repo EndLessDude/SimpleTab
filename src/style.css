@@ -16,9 +16,24 @@ margin: 0;
 background-color: black;
 }
 
-/* ====================== */
+/* ------------------- */
+/* Clock */
+
+#clock {
+    border-radius: 10px;
+    background-color: rgb(58, 58, 58);
+    padding: 5px;
+    position: absolute;
+    top: 10px;
+    font-weight: bold;
+    left: 20px;
+    color: white;
+    font-size: 30px;
+}
+
+/* ------------------- */
 /* Main New Tab */
-/* ====================== */
+
 
 .main-page {
 min-height: 100vh;

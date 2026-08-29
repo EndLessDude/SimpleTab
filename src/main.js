@@ -36,3 +36,30 @@ search.addEventListener("keydown", (event) => {
         window.location.href = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
     }
 });
+
+//Clock and
+const clock = document.querySelector("#clock");
+
+function updateClock() {
+    const now = new Date();
+
+    const time = now.toLocaleTimeString([], {
+        hour: "numeric",
+        minute: "2-digit"
+    });
+
+    const date = now.toLocaleDateString([], {
+        month: "2-digit",
+        day: "2-digit"
+    });
+
+    clock.textContent = `${time} • ${date}`;
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+
+
+
+
+
